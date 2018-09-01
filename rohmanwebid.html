@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>About Me</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap3.css?v3.2.0"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-vue.css?v4.1.3"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css"/>
+    <!-- <link rel="stylesheet" type="text/css" href="assets/themes/theme1/css/main.css"/> -->
+    <link rel="stylesheet" type="text/css" href="assets/themes/rohmanwebid/css/light.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/themes/rohmanwebid/css/responsive.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/themes/rohmanwebid/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/themes/rohmanwebid/css/color.css"/>
+</head>
+<body style="background-color: #efefef;">
+    <div class="container-fluid h-100" id="app">
+        <b-alert :show="notifications.dismissCountDown"
+                dismissible
+                fade
+                :variant="notifications.type"
+                @dismissed="notifications.dismissCountDown=0"
+                @dismiss-count-down="dismissNotif"
+                style="position: absolute;top: 85px; right: 10px;">
+            <p>Notification: {{notifications.message}}</p>
+            <b-progress variant="warning"
+                        :max="notifications.dismissSecs"
+                        :value="notifications.dismissCountDown"
+                        height="4px">
+            </b-progress>
+        </b-alert>
+        <header-template v-if="mainComponent.Header.show"></header-template>
+        <b-row class="h-100">
+            <b-col lg="2" v-if="mainComponent.LeftSide.show">
+                <left-sidebar-template :currentmenu="currentRoute"></left-sidebar-template>
+            </b-col>
+            <router-view></router-view>
+            <b-col lg="2" v-if="mainComponent.RightSide.show">
+                <right-sidebar-template></right-sidebar-template>
+            </b-col>
+        </b-row>
+        <b-row v-if="mainComponent.Footer.show">
+            <footer-template></footer-template>
+        </b-row>
+    </div>
+</body>
+<script src="./assets/js/vue.js?v2.5.17"></script>
+<script src="./assets/js/vue-router.js?v3.0.1"></script>
+<script src="./assets/js/bootstrap-vue/bootstrap-vue.js?v3.0.1"></script>
+<script src="./assets/js/bootstrap-vue/polyfill.min.js?v3.0.1"></script>
+<script src="./assets/js/axios.js"></script>
+<!-- <script data-main="./assets/js/main" src="./assets/js/require.js"></script> -->
+
+<!-- <script src="./js-modules/components/header.js"></script> -->
+<!-- <script src="./js-modules/components/left-sidebar.js"></script> -->
+<!-- <script src="./js-modules/components/right-sidebar.js"></script> -->
+<!-- <script src="./js-modules/components/footer.js"></script> -->
+<script src="./js-modules/rohmanwebid/app.js"></script>
+<script src="./js-modules/rohmanwebid/config.js"></script>
+</html>
